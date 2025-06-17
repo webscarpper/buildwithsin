@@ -3,7 +3,9 @@ import { siteConfig } from '@/lib/site';
 import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import './animation.css';
 import { Providers } from './providers';
+import { AppInitializer } from '@/components/app-initializer';
 import { Toaster } from '@/components/ui/sonner';
 import { Analytics } from '@vercel/analytics/react';
 import { GoogleAnalytics } from '@next/third-parties/google';
@@ -31,7 +33,7 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   description:
-    'Suna is a fully open source AI assistant that helps you accomplish real-world tasks with ease. Through natural conversation, Suna becomes your digital companion for research, data analysis, and everyday challenges.',
+    'GOATA is a DeFAI Agent that navigates the future of Web3, finding you alpha before the FOMO sets in.',
   keywords: [
     'AI',
     'artificial intelligence',
@@ -43,13 +45,13 @@ export const metadata: Metadata = {
     'research',
     'data analysis',
   ],
-  authors: [{ name: 'Kortix Team', url: 'https://suna.so' }],
+  authors: [{ name: 'GOATA Team', url: 'https://suna.so' }],
   creator:
-    'Kortix Team - Adam Cohen Hillel, Marko Kraemer, Domenico Gagliardi, and Quoc Dat Le',
+    'GOATA Team',
   publisher:
-    'Kortix Team - Adam Cohen Hillel, Marko Kraemer, Domenico Gagliardi, and Quoc Dat Le',
+    'GOATA Team',
   category: 'Technology',
-  applicationName: 'Suna',
+  applicationName: 'GOATA',
   formatDetection: {
     telephone: false,
     email: false,
@@ -64,17 +66,17 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Suna - Open Source Generalist AI Agent',
+    title: 'GOATA - Your Alpha-finding Web3 Agent.',
     description:
-      'Suna is a fully open source AI assistant that helps you accomplish real-world tasks with ease through natural conversation.',
+      'GOATA is a DeFAI Agent that navigates the future of Web3, finding you alpha before the FOMO sets in.',
     url: siteConfig.url,
-    siteName: 'Suna',
+    siteName: 'GOATA',
     images: [
       {
         url: '/banner.png',
         width: 1200,
         height: 630,
-        alt: 'Suna - Open Source Generalist AI Agent',
+        alt: 'GOATA - Your Alpha-finding Web3 Agent.',
         type: 'image/png',
       },
     ],
@@ -83,17 +85,17 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Suna - Open Source Generalist AI Agent',
+    title: 'GOATA - Your Alpha-finding Web3 Agent.',
     description:
-      'Suna is a fully open source AI assistant that helps you accomplish real-world tasks with ease through natural conversation.',
-    creator: '@kortixai',
-    site: '@kortixai',
+      'GOATA is a DeFAI Agent that navigates the future of Web3, finding you alpha before the FOMO sets in.',
+    creator: '@goata_ai',
+    site: '@goata_ai',
     images: [
       {
         url: '/banner.png',
         width: 1200,
         height: 630,
-        alt: 'Suna - Open Source Generalist AI Agent',
+        alt: 'GOATA - Your Alpha-finding Web3 Agent.',
       },
     ],
   },
@@ -146,7 +148,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Providers>
-            {children}
+            <AppInitializer>{children}</AppInitializer>
             <Toaster />
           </Providers>
           <Analytics />

@@ -260,42 +260,12 @@ export function HeroSection() {
             {hero.badge}
           </p> */}
 
-          <Link
-            href={hero.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group border border-border/50 bg-background hover:bg-accent/20 hover:border-secondary/40 rounded-full text-sm h-8 px-3 flex items-center gap-2 transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 hover:-translate-y-0.5"
-          >
-            {hero.badgeIcon}
-            <span className="font-medium text-muted-foreground text-xs tracking-wide group-hover:text-primary transition-colors duration-300">
-              {hero.badge}
-            </span>
-            <span className="inline-flex items-center justify-center size-3.5 rounded-full bg-muted/30 group-hover:bg-secondary/30 transition-colors duration-300">
-              <svg
-                width="8"
-                height="8"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-muted-foreground group-hover:text-primary"
-              >
-                <path
-                  d="M7 17L17 7M17 7H8M17 7V16"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-          </Link>
           <div className="flex flex-col items-center justify-center gap-5">
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tighter text-balance text-center">
-              <span className="text-secondary">Suna</span>
-              <span className="text-primary">, your AI Employee.</span>
+              Deploy <span className="text-blue-500">GOATA</span>. Go Touch Grass.
             </h1>
             <p className="text-base md:text-lg text-center text-muted-foreground font-medium text-balance leading-relaxed tracking-tight">
-              {hero.description}
+              A full-stack, autonomous degen agent that ships code, finds alpha, and grinds for you 24/7. No FUD, just WAGMI.
             </p>
           </div>
           <div className="flex items-center w-full max-w-xl gap-2 flex-wrap justify-center">
@@ -308,7 +278,7 @@ export function HeroSection() {
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    placeholder={hero.inputPlaceholder}
+                    placeholder="Unleash GOATA to find the next 100x gem..."
                     className="flex-1 h-12 md:h-14 rounded-full px-2 bg-transparent focus:outline-none text-sm md:text-base py-2"
                     disabled={isSubmitting}
                   />
@@ -336,8 +306,19 @@ export function HeroSection() {
           </div>
         </div>
       </div>
-      <div className="mb-10 max-w-4xl mx-auto">
-        <HeroVideoSection />
+      <div className="goata-features-container">
+        <div className="feature-card">
+            <h3>FIND THE ALPHA</h3>
+            <p>Uncover hidden gems before the FOMO hits. GOATA scans on-chain data, tracks whale wallets, and analyzes DeFi protocols to find your next 100x.</p>
+        </div>
+        <div className="feature-card">
+            <h3>SHIP ON-CHAIN</h3>
+            <p>Go from prompt to product, faster. GOATA writes, tests, and audits smart contracts, builds full-stack dApps, and automates your entire deployment pipeline.</p>
+        </div>
+        <div className="feature-card">
+            <h3>OPERATE AUTONOMOUSLY</h3>
+            <p>Set it and forget it. Deploy autonomous agents to manage DePIN infrastructure, track your RWA portfolio, or run complex trading strategies 24/7.</p>
+        </div>
       </div>
 
       {/* Auth Dialog */}
