@@ -121,14 +121,9 @@ const getEnvironmentMode = (): EnvMode => {
     }
   }
 
-  // If no valid environment mode is set, fall back to defaults based on NODE_ENV
-  if (process.env.NODE_ENV === 'development') {
-    console.log('Defaulting to LOCAL environment mode in development');
-    return EnvMode.LOCAL;
-  } else {
-    console.log('Defaulting to PRODUCTION environment mode');
-    return EnvMode.PRODUCTION;
-  }
+  // If no valid environment mode is set, fall back to PRODUCTION
+  console.log('Defaulting to PRODUCTION environment mode');
+  return EnvMode.PRODUCTION;
 };
 
 // Get the environment mode once to ensure consistency

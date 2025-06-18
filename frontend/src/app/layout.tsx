@@ -126,11 +126,50 @@ export default function RootLayout({
           })(window,document,'script','dataLayer','GTM-PCHSN4M2');`}
         </Script>
         <Script async src="https://cdn.tolt.io/tolt.js" data-tolt={process.env.NEXT_PUBLIC_TOLT_REFERRAL_ID}></Script>
+        <Script src="/vanilla-tilt.js"></Script>
       </head>
 
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans bg-background`}
       >
+        <div className="goata-background">
+          <div className="grid-background"></div>
+          <div className="energy-waves"></div>
+          {[...Array(20)].map((_, i) => (
+            <div
+              key={`p-${i}`}
+              className="particle"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                width: `${1 + Math.random() * 2}px`,
+                height: `${1 + Math.random() * 2}px`,
+                animationDelay: `${Math.random() * 5}s`,
+                animationDuration: `${3 + Math.random() * 4}s`,
+              }}
+            />
+          ))}
+          {[...Array(10)].map((_, i) => (
+            <div
+              key={`o-${i}`}
+              className="floating-orb"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 8}s`,
+                animationDuration: `${8 + Math.random() * 4}s`,
+              }}
+            >
+              <div
+                className="orb-core"
+                style={{
+                  width: `${6 + Math.random() * 12}px`,
+                  height: `${6 + Math.random() * 12}px`,
+                }}
+              />
+            </div>
+          ))}
+        </div>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-PCHSN4M2"

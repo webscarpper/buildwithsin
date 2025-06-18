@@ -1,21 +1,17 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import AnimationTest from '@/components/home/animation-test';
 
 export function AppInitializer({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 6000); // 6 seconds
-
-    return () => clearTimeout(timer);
-  }, []);
+  const handleAnimationComplete = () => {
+    setLoading(false);
+  };
 
   if (loading) {
-    return <AnimationTest />;
+    return <AnimationTest onAnimationComplete={handleAnimationComplete} />;
   }
 
   return <>{children}</>;

@@ -262,7 +262,8 @@ export function HeroSection() {
 
           <div className="flex flex-col items-center justify-center gap-5">
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium tracking-tighter text-balance text-center">
-              Deploy <span className="text-blue-500">GOATA</span>. Go Touch Grass.
+              Deploy <span className="goata-logo-text" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '0.8em' }}>GOATA</span>. Go Touch
+              Grass.
             </h1>
             <p className="text-base md:text-lg text-center text-muted-foreground font-medium text-balance leading-relaxed tracking-tight">
               A full-stack, autonomous degen agent that ships code, finds alpha, and grinds for you 24/7. No FUD, just WAGMI.
@@ -307,17 +308,79 @@ export function HeroSection() {
         </div>
       </div>
       <div className="goata-features-container">
-        <div className="feature-card">
-            <h3>FIND THE ALPHA</h3>
-            <p>Uncover hidden gems before the FOMO hits. GOATA scans on-chain data, tracks whale wallets, and analyzes DeFi protocols to find your next 100x.</p>
+        <div className="card-wrapper relative inline-block overflow-visible transition-transform duration-300 ease-out hover:scale-103">
+          <div className="feature-card overflow-visible shadow-md hover:shadow-[0_0_20px_rgba(0,255,204,0.4)] border border-transparent hover:border-cyan-400 pb-8 flex flex-col items-center text-center p-6 rounded-xl bg-[rgba(0,0,0,0.4)] backdrop-blur-md">
+            <svg
+              className="w-10 h-10 mb-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            <h3 className="text-white font-semibold mb-2">FIND THE ALPHA</h3>
+            <p className="text-gray-300">
+              Uncover hidden gems before the FOMO hits. GOATA scans on-chain
+              data, tracks whale wallets, and analyzes DeFi protocols to find
+              your next 100x.
+            </p>
+          </div>
         </div>
-        <div className="feature-card">
-            <h3>SHIP ON-CHAIN</h3>
-            <p>Go from prompt to product, faster. GOATA writes, tests, and audits smart contracts, builds full-stack dApps, and automates your entire deployment pipeline.</p>
+        <div className="card-wrapper relative inline-block overflow-visible transition-transform duration-300 ease-out hover:scale-103">
+          <div className="feature-card overflow-visible shadow-md hover:shadow-[0_0_20px_rgba(0,255,204,0.4)] border border-transparent hover:border-cyan-400 pb-8 flex flex-col items-center text-center p-6 rounded-xl bg-[rgba(0,0,0,0.4)] backdrop-blur-md">
+            <svg
+              className="w-10 h-10 mb-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M13 10V3L4 14h7v7l9-11h-7z"
+              ></path>
+            </svg>
+            <h3 className="text-white font-semibold mb-2">SHIP ON-CHAIN</h3>
+            <p className="text-gray-300">
+              Go from prompt to product, faster. GOATA writes, tests, and
+              audits smart contracts, builds full-stack dApps, and automates
+              your entire deployment pipeline.
+            </p>
+          </div>
         </div>
-        <div className="feature-card">
-            <h3>OPERATE AUTONOMOUSLY</h3>
-            <p>Set it and forget it. Deploy autonomous agents to manage DePIN infrastructure, track your RWA portfolio, or run complex trading strategies 24/7.</p>
+        <div className="card-wrapper relative inline-block overflow-visible transition-transform duration-300 ease-out hover:scale-103">
+          <div className="feature-card overflow-visible shadow-md hover:shadow-[0_0_20px_rgba(0,255,204,0.4)] border border-transparent hover:border-cyan-400 pb-8 flex flex-col items-center text-center p-6 rounded-xl bg-[rgba(0,0,0,0.4)] backdrop-blur-md">
+            <svg
+              className="w-10 h-10 mb-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M10 20l4-16m4 4l-4 4-4-4 4-4"
+              ></path>
+            </svg>
+            <h3 className="text-white font-semibold mb-2">
+              OPERATE AUTONOMOUSLY
+            </h3>
+            <p className="text-gray-300">
+              Set it and forget it. Deploy autonomous agents to manage DePIN
+              infrastructure, track your RWA portfolio, or run complex
+              trading strategies 24/7.
+            </p>
+          </div>
         </div>
       </div>
 

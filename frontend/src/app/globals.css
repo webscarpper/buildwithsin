@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import 'tailwindcss';
 @import 'tw-animate-css';
 @plugin 'tailwind-scrollbar';
@@ -657,52 +658,106 @@
 
 /* --- STYLING FOR THE FEATURE CARDS --- */
 
-/* The container that holds the three cards */
 .goata-features-container {
-    display: grid; /* Use a modern grid layout */
-    grid-template-columns: repeat(3, 1fr); /* Create three columns of equal width */
-    gap: 24px; /* The space between each card */
-    width: 100%;
-    max-width: 1200px; /* Set a max-width for very large screens */
-    margin: 64px auto 0 auto; /* Add space above the cards and center the container */
-    padding: 0 20px; /* Add some side padding for spacing */
-    box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 64px auto 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
 }
 
-/* The style for each individual card */
 .feature-card {
-    background: rgba(20, 22, 25, 0.6); /* A slightly darker, semi-transparent background */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* A subtle, light border */
-    border-radius: 16px; /* Modern, rounded corners */
-    padding: 28px; /* Generous internal spacing */
-    backdrop-filter: blur(10px); /* Glassmorphism effect for a modern feel */
-    -webkit-backdrop-filter: blur(10px); /* Safari support for backdrop-filter */
-    transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
-    text-align: left; /* Ensure text is left-aligned */
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: box-shadow 0.3s ease-out;
+  position: relative;
 }
 
-/* A glow/highlight effect when the user hovers over a card */
-.feature-card:hover {
-    transform: translateY(-8px); /* Lift the card up on hover */
-    border-color: rgba(74, 144, 226, 0.9); /* Highlight with the brand's blue color */
-    box-shadow: 0 10px 40px rgba(74, 144, 226, 0.15); /* Add a subtle blue glow */
-}
-
-/* Styling for the card's title (e.g., "FIND THE ALPHA") */
 .feature-card h3 {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #FFFFFF;
-    margin: 0 0 12px 0; /* Remove top margin, add bottom margin */
-    letter-spacing: 0.5px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 12px 0;
+  letter-spacing: 0.5px;
 }
 
-/* Styling for the card's description text */
 .feature-card p {
-    font-size: 0.9rem;
-    color: #aeb8c4; /* A light, readable grey, not harsh white */
-    line-height: 1.6;
-    margin: 0; /* Remove default paragraph margin */
+  font-size: 0.9rem;
+  color: #aeb8c4;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.goata-logo-text {
+  color: #6beac9;
+  text-shadow: 0 0 8px rgba(107,234,201,0.6);
+}
+
+.usecase-card {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid transparent;
+  transition: all 0.3s ease-out;
+  position: relative;
+  overflow: visible;
+}
+
+.usecase-card:hover {
+  box-shadow: 0 0 20px rgba(107, 234, 201, 0.4);
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to bottom right, #00f2ff, #00a2ff);
+}
+
+.faq-card {
+  background: rgba(10, 10, 10, 0.4);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  border: 1px solid transparent;
+  transition: all 0.3s ease-out;
+}
+
+.faq-card:hover {
+  border-color: rgba(107, 234, 201, 0.4);
+  box-shadow: 0 0 20px rgba(107, 234, 201, 0.2);
+}
+
+.cta-panel {
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.8) 0%, rgba(10, 10, 10, 0.4) 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  border: 1px solid rgba(107, 234, 201, 0.2);
+  box-shadow: 0 0 30px rgba(107, 234, 201, 0.1);
+}
+
+.cta-button {
+  background: linear-gradient(90deg, #00f2ff 0%, #00a2ff 100%);
+  box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+  transition: all 0.3s ease-out;
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(0, 242, 255, 0.8);
 }
 
 /* --- RESPONSIVE STYLING FOR MOBILE/TABLET --- */
@@ -712,4 +767,104 @@
         gap: 20px;
         margin-top: 48px;
     }
+}
+
+/* --- REUSABLE GOATA ANIMATED BACKGROUND --- */
+
+.goata-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0a0a0a;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.goata-background .grid-background {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 255, 204, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 204, 0.07) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: grid-move 20s linear infinite;
+}
+
+.goata-background .energy-waves {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    rgba(0, 255, 204, 0.1) 0%,
+    rgba(0, 230, 184, 0.08) 30%,
+    rgba(0, 184, 153, 0.05) 60%,
+    transparent 80%
+  );
+  animation: energy-ripple 4s ease-in-out infinite;
+}
+
+.goata-background .particle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: #00ffcc;
+  animation: float-complex linear infinite;
+}
+
+.goata-background .floating-orb {
+  position: absolute;
+  animation: orb-float linear infinite;
+}
+
+.goata-background .orb-core {
+  background: radial-gradient(circle at 30% 30%, #ffffff, #00ffcc, #00b8a0);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 204, 0.8),
+    0 0 40px rgba(0, 255, 204, 0.4),
+    inset 0 0 10px rgba(255, 255, 255, 0.3);
+  animation: orb-glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes grid-move {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+@keyframes energy-ripple {
+  0% { transform: scale(0.5); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 0.2; }
+  100% { transform: scale(0.5); opacity: 0.8; }
+}
+
+@keyframes float-complex {
+  0% { transform: translateY(0px) rotate(0deg) scale(1); }
+  25% { transform: translateY(-20px) rotate(90deg) scale(1.1); }
+  50% { transform: translateY(-10px) rotate(180deg) scale(0.9); }
+  75% { transform: translateY(-30px) rotate(270deg) scale(1.2); }
+  100% { transform: translateY(0px) rotate(360deg) scale(1); }
+}
+
+@keyframes orb-float {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
+  25% { transform: translate(100px, -50px) rotate(90deg); opacity: 0.8; }
+  50% { transform: translate(-50px, -100px) rotate(180deg); opacity: 0.6; }
+  75% { transform: translate(-100px, 50px) rotate(270deg); opacity: 0.9; }
+  100% { transform: translate(0, 0) rotate(360deg); opacity: 0.3; }
+}
+
+@keyframes orb-glow {
+  from {
+    box-shadow: 
+      0 0 20px rgba(0, 255, 204, 0.8),
+      0 0 40px rgba(0, 255, 204, 0.4),
+      inset 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  to {
+    box-shadow: 
+      0 0 30px rgba(0, 255, 204, 1),
+      0 0 60px rgba(0, 255, 204, 0.6),
+      inset 0 0 15px rgba(255, 255, 255, 0.5);
+  }
 }

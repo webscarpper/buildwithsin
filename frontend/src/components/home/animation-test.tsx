@@ -1,9 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-const AnimationTest = () => {
+interface AnimationTestProps {
+  onAnimationComplete: () => void;
+}
+
+const AnimationTest: React.FC<AnimationTestProps> = ({ onAnimationComplete }) => {
   const [currentLetter, setCurrentLetter] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  const [isFadingOut, setIsFadingOut] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    audioRef.current = new Audio('/audio/goat-sound.mp3');
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -20,10 +30,34 @@ const AnimationTest = () => {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    if (isComplete) {
+      const fadeOutTimer = setTimeout(() => {
+        setIsFadingOut(true);
+        // Set another timer to call the completion callback after the fade-out animation
+        const completionTimer = setTimeout(() => {
+          if (audioRef.current) {
+            audioRef.current.volume = 0.6;
+            audioRef.current.play().catch(e => console.error("Audio play failed:", e));
+          }
+          onAnimationComplete();
+        }, 1000); // Duration of the fade-out animation
+
+        return () => clearTimeout(completionTimer);
+      }, 5000); // Start fade-out after 5 seconds (duration of progress bar)
+
+      return () => clearTimeout(fadeOutTimer);
+    }
+  }, [isComplete, onAnimationComplete]);
+
   const goataLetters = ['G', 'O', 'A', 'T', 'A'];
 
   return (
-    <div className="min-h-screen bg-black flex flex-col items-center justify-center overflow-hidden relative">
+    <div
+      className={`min-h-screen bg-black flex flex-col items-center justify-center overflow-hidden relative ${
+        isFadingOut ? 'fade-out' : ''
+      }`}
+    >
       {/* Complex animated background grid */}
       <div className="absolute inset-0 z-0">
         <div className="grid-background"></div>
