@@ -17,10 +17,52 @@ import os
 from services.langfuse import langfuse
 from utils.retry import retry
 
+# RabbitMQ broker configuration - supports individual CloudAMQP parameters
 rabbitmq_host = os.getenv('RABBITMQ_HOST', 'rabbitmq')
 rabbitmq_port = int(os.getenv('RABBITMQ_PORT', 5672))
-rabbitmq_broker = RabbitmqBroker(host=rabbitmq_host, port=rabbitmq_port, middleware=[dramatiq.middleware.AsyncIO()])
-dramatiq.set_broker(rabbitmq_broker)
+rabbitmq_user = os.getenv('RABBITMQ_USER')
+rabbitmq_password = os.getenv('RABBITMQ_PASSWORD')
+rabbitmq_vhost = os.getenv('RABBITMQ_VHOST', '/')
+rabbitmq_ssl = os.getenv('RABBITMQ_SSL', 'false').lower() == 'true'
+
+# Configure broker parameters
+broker_params = {
+    'host': rabbitmq_host,
+    'port': rabbitmq_port,
+    'middleware': [dramatiq.middleware.AsyncIO()]
+}
+
+# Add authentication if provided
+if rabbitmq_user and rabbitmq_password:
+    broker_params['username'] = rabbitmq_user
+    broker_params['password'] = rabbitmq_password
+    logger.info(f"Configuring RabbitMQ with authentication for user: {rabbitmq_user}")
+
+# Add virtual host if specified
+if rabbitmq_vhost != '/':
+    broker_params['virtual_host'] = rabbitmq_vhost
+    logger.info(f"Using RabbitMQ virtual host: {rabbitmq_vhost}")
+
+# Configure SSL if enabled
+if rabbitmq_ssl:
+    import ssl
+    ssl_context = ssl.create_default_context()
+    ssl_context.check_hostname = False  # CloudAMQP certificates may not match hostname
+    broker_params['ssl'] = True
+    broker_params['ssl_context'] = ssl_context
+    logger.info("✅ SSL/TLS enabled for RabbitMQ connection")
+
+logger.info(f"Configuring RabbitMQ broker - Host: {rabbitmq_host}:{rabbitmq_port}, SSL: {rabbitmq_ssl}")
+
+# Validate broker configuration before setting it globally
+try:
+    rabbitmq_broker = RabbitmqBroker(**broker_params)
+    dramatiq.set_broker(rabbitmq_broker)
+    logger.info("✅ RabbitMQ broker configured successfully")
+except Exception as e:
+    logger.error(f"❌ Failed to configure RabbitMQ broker: {e}")
+    logger.error(f"💡 Check CloudAMQP credentials and network connectivity")
+    raise e
 
 _initialized = False
 db = DBConnection()

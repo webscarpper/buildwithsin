@@ -9,4 +9,9 @@ enabled = False
 if public_key and secret_key:
     enabled = True
 
-langfuse = Langfuse(enabled=enabled)
+langfuse = Langfuse(
+    public_key=public_key,
+    secret_key=secret_key,
+    host=host,
+    enabled=enabled
+)
