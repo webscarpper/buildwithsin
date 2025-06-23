@@ -32,18 +32,29 @@ def initialize():
 
     logger.info(f"Initializing Redis connection to {redis_host}:{redis_port}")
 
-    # Create Redis client with basic configuration
-    client = redis.Redis(
-        host=redis_host,
-        port=redis_port,
-        password=redis_password,
-        ssl=redis_ssl,
-        decode_responses=True,
-        socket_timeout=5.0,
-        socket_connect_timeout=5.0,
-        retry_on_timeout=True,
-        health_check_interval=30,
-    )
+    # Create Redis client with proper SSL configuration for Redis Cloud
+    redis_params = {
+        'host': redis_host,
+        'port': redis_port,
+        'password': redis_password,
+        'decode_responses': True,
+        'socket_timeout': 5.0,
+        'socket_connect_timeout': 5.0,
+        'retry_on_timeout': True,
+        'health_check_interval': 30,
+    }
+    
+    # Configure SSL for Redis Cloud
+    if redis_ssl:
+        import ssl
+        redis_params['ssl'] = True
+        redis_params['ssl_cert_reqs'] = None  # Disable certificate verification
+        redis_params['ssl_check_hostname'] = False  # Disable hostname checking
+        logger.info("✅ SSL enabled for Redis connection")
+    else:
+        logger.info("Using Redis without SSL")
+
+    client = redis.Redis(**redis_params)
 
     return client
 
