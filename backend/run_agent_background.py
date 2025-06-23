@@ -25,38 +25,42 @@ rabbitmq_password = os.getenv('RABBITMQ_PASSWORD')
 rabbitmq_vhost = os.getenv('RABBITMQ_VHOST', '/')
 rabbitmq_ssl = os.getenv('RABBITMQ_SSL', 'false').lower() == 'true'
 
-# Configure broker parameters
-broker_params = {
+# Import pika for connection parameters
+import pika
+import ssl
+
+# Configure connection parameters
+connection_params = {
     'host': rabbitmq_host,
     'port': rabbitmq_port,
-    'middleware': [dramatiq.middleware.AsyncIO()]
+    'virtual_host': rabbitmq_vhost
 }
 
 # Add authentication if provided
 if rabbitmq_user and rabbitmq_password:
-    broker_params['username'] = rabbitmq_user
-    broker_params['password'] = rabbitmq_password
+    credentials = pika.PlainCredentials(rabbitmq_user, rabbitmq_password)
+    connection_params['credentials'] = credentials
     logger.info(f"Configuring RabbitMQ with authentication for user: {rabbitmq_user}")
-
-# Add virtual host if specified
-if rabbitmq_vhost != '/':
-    broker_params['virtual_host'] = rabbitmq_vhost
-    logger.info(f"Using RabbitMQ virtual host: {rabbitmq_vhost}")
 
 # Configure SSL if enabled
 if rabbitmq_ssl:
-    import ssl
     ssl_context = ssl.create_default_context()
     ssl_context.check_hostname = False  # CloudAMQP certificates may not match hostname
-    broker_params['ssl'] = True
-    broker_params['ssl_context'] = ssl_context
+    ssl_options = pika.SSLOptions(ssl_context)
+    connection_params['ssl_options'] = ssl_options
     logger.info("✅ SSL/TLS enabled for RabbitMQ connection")
 
 logger.info(f"Configuring RabbitMQ broker - Host: {rabbitmq_host}:{rabbitmq_port}, SSL: {rabbitmq_ssl}")
 
+# Create pika ConnectionParameters object
+connection_parameters = pika.ConnectionParameters(**connection_params)
+
 # Validate broker configuration before setting it globally
 try:
-    rabbitmq_broker = RabbitmqBroker(**broker_params)
+    rabbitmq_broker = RabbitmqBroker(
+        parameters=connection_parameters,
+        middleware=[dramatiq.middleware.AsyncIO()]
+    )
     dramatiq.set_broker(rabbitmq_broker)
     logger.info("✅ RabbitMQ broker configured successfully")
 except Exception as e:
