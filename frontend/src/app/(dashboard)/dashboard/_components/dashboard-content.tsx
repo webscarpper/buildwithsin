@@ -31,26 +31,33 @@ import { useModal } from '@/hooks/use-modal-store';
 import { Examples } from './suggestions/examples';
 import { useThreadQuery } from '@/hooks/react-query/threads/use-threads';
 import { normalizeFilenameToNFC } from '@/lib/utils/unicode';
+import { FlickeringGrid } from '@/components/home/ui/flickering-grid';
+import { useMediaQuery } from '@/hooks/use-media-query';
 
 const PENDING_PROMPT_KEY = 'pendingAgentPrompt';
-
 export function DashboardContent() {
   const [inputValue, setInputValue] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [autoSubmit, setAutoSubmit] = useState(false);
   const [selectedAgentId, setSelectedAgentId] = useState<string | undefined>();
   const [initiatedThreadId, setInitiatedThreadId] = useState<string | null>(null);
+  const [mounted, setMounted] = useState(false);
   const { billingError, handleBillingError, clearBillingError } =
     useBillingError();
   const router = useRouter();
   const searchParams = useSearchParams();
   const isMobile = useIsMobile();
+  const tablet = useMediaQuery('(max-width: 1024px)');
   const { setOpenMobile } = useSidebar();
   const { data: accounts } = useAccounts();
   const personalAccount = accounts?.find((account) => account.personal_account);
   const chatInputRef = useRef<ChatInputHandles>(null);
   const initiateAgentMutation = useInitiateAgentWithInvalidation();
   const { onOpen } = useModal();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const threadQuery = useThreadQuery(initiatedThreadId || '');
 
@@ -170,9 +177,42 @@ export function DashboardContent() {
   return (
     <>
       <ModalProviders />
-      <div className="flex flex-col h-screen w-full">
+      <div className="flex flex-col h-screen w-full relative overflow-hidden">
+        {/* Animated grid background */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(0, 230, 184, 0.15) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(0, 230, 184, 0.15) 1px, transparent 1px)
+            `,
+            backgroundSize: '30px 30px',
+            animation: 'gridMove 20s linear infinite'
+          }}
+        ></div>
+
+        {/* FlickeringGrid overlay */}
+        <div className="absolute inset-0 z-10">
+          <FlickeringGrid
+            squareSize={4}
+            gridGap={6}
+            color="#00e6b8"
+            maxOpacity={0.5}
+            flickerChance={0.3}
+            className="w-full h-full"
+          />
+        </div>
+
+        {/* Add keyframes for animation */}
+        <style jsx>{`
+          @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 30px 30px; }
+          }
+        `}</style>
+
         {isMobile && (
-          <div className="absolute top-4 left-4 z-10">
+          <div className="absolute top-4 left-4 z-20">
             <Tooltip>
               <TooltipTrigger asChild>
                 <Button
@@ -190,40 +230,43 @@ export function DashboardContent() {
           </div>
         )}
 
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[650px] max-w-[90%]">
-          <div className="flex flex-col items-center text-center w-full">
-            <div className="flex items-center gap-1">
-              <h1 className="tracking-tight text-4xl text-muted-foreground leading-tight">
-                Hey, I am
-              </h1>
-              <AgentSelector
-                selectedAgentId={selectedAgentId}
-                onAgentSelect={setSelectedAgentId}
-                variant="heading"
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[650px] max-w-[90%] z-20">
+          {/* Glassmorphism card container */}
+          <div className="backdrop-blur-xl bg-black/20 border border-white/10 rounded-2xl p-8 shadow-2xl">
+            <div className="flex flex-col items-center text-center w-full">
+              <div className="flex items-center gap-1">
+                <h1 className="tracking-tight text-4xl text-white leading-tight font-medium">
+                  Hey, I am
+                </h1>
+                <AgentSelector
+                  selectedAgentId={selectedAgentId}
+                  onAgentSelect={setSelectedAgentId}
+                  variant="heading"
+                />
+              </div>
+              <p className="tracking-tight text-3xl font-normal text-white/80 mt-2">
+                What would you like to do today?
+              </p>
+            </div>
+
+            <div className={cn(
+              "w-full mb-2 mt-8",
+              "max-w-full",
+              "sm:max-w-3xl"
+            )}>
+              <ChatInput
+                ref={chatInputRef}
+                onSubmit={handleSubmit}
+                loading={isSubmitting}
+                placeholder="Describe what you need help with..."
+                value={inputValue}
+                onChange={setInputValue}
+                hideAttachments={false}
               />
             </div>
-            <p className="tracking-tight text-3xl font-normal text-muted-foreground/80 mt-2">
-              What would you like to do today?
-            </p>
-          </div>
 
-          <div className={cn(
-            "w-full mb-2",
-            "max-w-full",
-            "sm:max-w-3xl"
-          )}>
-            <ChatInput
-              ref={chatInputRef}
-              onSubmit={handleSubmit}
-              loading={isSubmitting}
-              placeholder="Describe what you need help with..."
-              value={inputValue}
-              onChange={setInputValue}
-              hideAttachments={false}
-            />
+            <Examples onSelectPrompt={setInputValue} />
           </div>
-
-          <Examples onSelectPrompt={setInputValue} />
         </div>
 
         <BillingErrorAlert

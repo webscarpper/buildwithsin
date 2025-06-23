@@ -7,6 +7,7 @@ import './animation.css';
 import { Providers } from './providers';
 import { AppInitializer } from '@/components/app-initializer';
 import { Toaster } from '@/components/ui/sonner';
+// import { WalletContextProvider } from '@/providers/WalletContextProvider';
 import { Analytics } from '@vercel/analytics/react';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { SpeedInsights } from '@vercel/speed-insights/next';
@@ -100,8 +101,13 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: [{ url: '/favicon.png', sizes: 'any' }],
-    shortcut: '/favicon.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/goata-symbol.png', sizes: '32x32', type: 'image/png' },
+      { url: '/goata-symbol.png', sizes: '16x16', type: 'image/png' }
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/goata-symbol.png',
   },
   // manifest: "/manifest.json",
   alternates: {
@@ -187,7 +193,10 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Providers>
-            <AppInitializer>{children}</AppInitializer>
+            {/* WalletContextProvider temporarily disabled for deployment */}
+            {/* <WalletContextProvider> */}
+              <AppInitializer>{children}</AppInitializer>
+            {/* </WalletContextProvider> */}
             <Toaster />
           </Providers>
           <Analytics />

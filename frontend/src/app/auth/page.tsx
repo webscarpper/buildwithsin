@@ -5,6 +5,8 @@ import { SubmitButton } from '@/components/ui/submit-button';
 import { Input } from '@/components/ui/input';
 import GoogleSignIn from '@/components/GoogleSignIn';
 import { FlickeringGrid } from '@/components/home/ui/flickering-grid';
+// import PhantomSignIn from '@/components/PhantomSignIn';
+// import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { useScroll } from 'motion/react';
@@ -366,7 +368,7 @@ function LoginContent() {
               </Link>
 
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium tracking-tighter text-center text-balance text-primary">
-                {isSignUp ? 'Join Suna' : 'Welcome back'}
+                {isSignUp ? 'Join GOATA' : 'Welcome back'}
               </h1>
               <p className="text-base md:text-lg text-center text-muted-foreground font-medium text-balance leading-relaxed tracking-tight mt-2 mb-6">
                 {isSignUp
@@ -390,6 +392,9 @@ function LoginContent() {
               {/* Google Sign In */}
               <div className="w-full">
                 <GoogleSignIn returnUrl={returnUrl || undefined} />
+                {/* Web3 components temporarily disabled for deployment */}
+                {/* <WalletMultiButton /> */}
+                {/* <PhantomSignIn /> */}
               </div>
 
               {/* Divider */}
@@ -492,16 +497,6 @@ function LoginContent() {
                 )}
               </form>
 
-              <div className="mt-8 text-center text-xs text-muted-foreground">
-                By continuing, you agree to our{' '}
-                <Link href="/terms" className="text-primary hover:underline">
-                  Terms of Service
-                </Link>{' '}
-                and{' '}
-                <Link href="/privacy" className="text-primary hover:underline">
-                  Privacy Policy
-                </Link>
-              </div>
             </div>
           </div>
         </section>

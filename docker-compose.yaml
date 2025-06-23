@@ -82,8 +82,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    volumes:
-      - ./frontend/.env.local:/app/.env.local:ro
+    env_file:
+      - ./backend/.env
     environment:
       - NODE_ENV=production
     command: ["npm", "run", "start"]

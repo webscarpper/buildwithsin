@@ -1,4 +1,4 @@
-# Suna Backend
+# GOATA Backend
 
 ## Running the backend
 

@@ -1,4 +1,4 @@
-# Suna frontend
+# GOATA frontend
 
 ## Getting Started
 

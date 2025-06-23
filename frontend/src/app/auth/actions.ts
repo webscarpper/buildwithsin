@@ -172,3 +172,12 @@ export async function signOut() {
 
   return redirect('/');
 }
+export async function signInWithSolana(payload: {
+  publicKey: string;
+  signature: string;
+  message: string;
+}) {
+  // This function is now deprecated as Web3 auth is handled client-side
+  // Keeping for backward compatibility
+  return { message: 'Please use client-side Web3 authentication' };
+}

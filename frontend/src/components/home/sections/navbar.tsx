@@ -161,7 +161,6 @@ export function Navbar() {
                   </Link>
                 )}
               </div>
-              <ThemeToggle />
               <button
                 className="md:hidden border border-border size-8 rounded-md cursor-pointer flex items-center justify-center"
                 onClick={toggleDrawer}
@@ -210,7 +209,7 @@ export function Navbar() {
                       priority
                     />
                     <span className="font-medium text-primary text-sm">
-                      / Suna
+                      / GOATA
                     </span>
                   </Link>
                   <button
@@ -272,9 +271,6 @@ export function Navbar() {
                       Get Started
                     </Link>
                   )}
-                  <div className="flex justify-between">
-                    <ThemeToggle />
-                  </div>
                 </div>
               </div>
             </motion.div>

@@ -223,11 +223,16 @@ def collect_supabase_info():
         if validate_api_key(supabase_service_role_key):
             break
         print_error("Invalid API key format. It should be at least 10 characters long.")
+
+    google_client_id = input("Enter your Google Client ID (optional, press Enter to skip): ")
+    if google_client_id and not validate_api_key(google_client_id):
+        print_warning("The Google Client ID format seems invalid, but continuing anyway.")
     
     return {
         'SUPABASE_URL': supabase_url,
         'SUPABASE_ANON_KEY': supabase_anon_key,
         'SUPABASE_SERVICE_ROLE_KEY': supabase_service_role_key,
+        'NEXT_PUBLIC_GOOGLE_CLIENT_ID': '',
     }
 
 def collect_daytona_info():
@@ -574,6 +579,7 @@ def configure_frontend_env(env_vars, use_docker=True):
         'NEXT_PUBLIC_BACKEND_URL': backend_url,
         'NEXT_PUBLIC_URL': 'http://localhost:3000',
         'NEXT_PUBLIC_ENV_MODE': 'LOCAL',
+        'NEXT_PUBLIC_GOOGLE_CLIENT_ID': env_vars['supabase'].get('NEXT_PUBLIC_GOOGLE_CLIENT_ID', '')
     }
 
     # Write to file

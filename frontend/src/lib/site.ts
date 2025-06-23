@@ -1,11 +1,11 @@
 export const siteConfig = {
-  name: 'Kortix Suna',
-  url: 'https://suna.so/',
-  description: 'Kortix AI',
+  name: 'GOATA',
+  url: 'https://goata.app/',
+  description: 'Greatest of All Time Assistant',
   links: {
-    twitter: 'https://x.com/kortixai',
-    github: 'https://github.com/kortix-ai/',
-    linkedin: 'https://www.linkedin.com/company/kortix/',
+    twitter: 'https://x.com/GoataAI',
+    telegram: 'https://t.me/GoataAI',
+    github: 'https://github.com/goata-ai/goata',
   },
 };
 
