@@ -184,6 +184,97 @@ async def run_agent_background(
             stop_signal_received = True # Stop the run if the checker fails
 
     trace = langfuse.trace(name="agent_run", id=agent_run_id, session_id=thread_id, metadata={"project_id": project_id, "instance_id": instance_id})
+    
+    # Add timeout wrapper for the entire agent run
+    timeout_seconds = 7200  # 2 hours max per agent run
+    
+    try:
+        # Use asyncio.wait_for to add timeout to entire agent execution
+        await asyncio.wait_for(_run_agent_with_timeout(
+            agent_run_id, thread_id, instance_id, project_id, model_name,
+            enable_thinking, reasoning_effort, stream, enable_context_manager,
+            agent_config, trace, is_agent_builder, target_agent_id,
+            instance_control_channel, global_control_channel, instance_active_key,
+            response_list_key, response_channel
+        ), timeout=timeout_seconds)
+        
+    except asyncio.TimeoutError:
+        error_message = f"Agent run exceeded {timeout_seconds/3600:.1f} hour timeout"
+        logger.error(f"Agent run {agent_run_id} timed out after {timeout_seconds} seconds")
+        final_status = "failed"
+        trace.span(name="agent_run_timeout").end(status_message=error_message, level="ERROR")
+        
+        # Push timeout error to Redis
+        timeout_response = {"type": "status", "status": "error", "message": error_message}
+        try:
+            await redis.rpush(response_list_key, json.dumps(timeout_response))
+            await redis.publish(response_channel, "new")
+        except Exception as redis_err:
+            logger.error(f"Failed to push timeout error to Redis for {agent_run_id}: {redis_err}")
+        
+        # Update DB status for timeout
+        # Update DB status for timeout
+        await update_agent_run_status(client, agent_run_id, "failed", error=error_message, responses=[timeout_response])
+
+    except Exception as e:
+        error_message = str(e)
+        logger.error(f"Error in agent run {agent_run_id}: {error_message}")
+        final_status = "failed"
+        
+        # Update DB status for general error
+        await update_agent_run_status(client, agent_run_id, "failed", error=error_message, responses=[])
+
+    finally:
+        # Clean up the run lock and Redis keys
+        await _cleanup_redis_response_list(agent_run_id)
+        await _cleanup_redis_instance_key(agent_run_id)
+        await _cleanup_redis_run_lock(agent_run_id)
+
+        logger.info(f"Agent run background task fully completed for: {agent_run_id} (Instance: {instance_id})")
+
+
+async def _run_agent_with_timeout(
+    agent_run_id, thread_id, instance_id, project_id, model_name,
+    enable_thinking, reasoning_effort, stream, enable_context_manager,
+    agent_config, trace, is_agent_builder, target_agent_id,
+    instance_control_channel, global_control_channel, instance_active_key,
+    response_list_key, response_channel
+):
+    """Internal function to run agent with proper error handling and timeout support."""
+    from services.supabase import DBConnection
+    
+    db = DBConnection()
+    client = await db.client
+    start_time = datetime.now(timezone.utc)
+    
+    pubsub = None
+    stop_checker = None
+    stop_signal_received = False
+    total_responses = 0
+    async def check_for_stop_signal():
+        nonlocal stop_signal_received
+        if not pubsub: return
+        try:
+            while not stop_signal_received:
+                message = await pubsub.get_message(ignore_subscribe_messages=True, timeout=0.5)
+                if message and message.get("type") == "message":
+                    data = message.get("data")
+                    if isinstance(data, bytes): data = data.decode('utf-8')
+                    if data == "STOP":
+                        logger.info(f"Received STOP signal for agent run {agent_run_id} (Instance: {instance_id})")
+                        stop_signal_received = True
+                        break
+                # Periodically refresh the active run key TTL
+                if total_responses % 50 == 0: # Refresh every 50 responses or so
+                    try: await redis.expire(instance_active_key, redis.REDIS_KEY_TTL)
+                    except Exception as ttl_err: logger.warning(f"Failed to refresh TTL for {instance_active_key}: {ttl_err}")
+                await asyncio.sleep(0.1) # Short sleep to prevent tight loop
+        except asyncio.CancelledError:
+            logger.info(f"Stop signal checker cancelled for {agent_run_id} (Instance: {instance_id})")
+        except Exception as e:
+            logger.error(f"Error in stop signal checker for {agent_run_id}: {e}", exc_info=True)
+            stop_signal_received = True # Stop the run if the checker fails
+
     try:
         # Setup Pub/Sub listener for control signals
         pubsub = await redis.create_pubsub()
@@ -199,7 +290,6 @@ async def run_agent_background(
         # Ensure active run key exists and has TTL
         await redis.set(instance_active_key, "running", ex=redis.REDIS_KEY_TTL)
 
-
         # Initialize agent generator
         agent_gen = run_agent(
             thread_id=thread_id, project_id=project_id, stream=stream,
@@ -214,7 +304,6 @@ async def run_agent_background(
 
         final_status = "running"
         error_message = None
-
         pending_redis_operations = []
 
         async for response in agent_gen:

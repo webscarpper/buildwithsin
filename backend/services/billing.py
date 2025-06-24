@@ -178,7 +178,7 @@ async def calculate_monthly_usage(client, user_id: str) -> float:
     
     # Then get all agent runs for these threads in current month
     runs_result = await client.table('agent_runs') \
-        .select('started_at, completed_at') \
+        .select('id, started_at, completed_at, status') \
         .in_('thread_id', thread_ids) \
         .gte('started_at', start_of_month.isoformat()) \
         .execute()
@@ -189,18 +189,59 @@ async def calculate_monthly_usage(client, user_id: str) -> float:
     # Calculate total minutes
     total_seconds = 0
     now_ts = now.timestamp()
+    stuck_runs_found = []
     
     for run in runs_result.data:
+        run_id = run['id']
+        status = run['status']
         start_time = datetime.fromisoformat(run['started_at'].replace('Z', '+00:00')).timestamp()
-        if run['completed_at']:
-            end_time = datetime.fromisoformat(run['completed_at'].replace('Z', '+00:00')).timestamp()
-        else:
-            # For running jobs, use current time
-            end_time = now_ts
         
-        total_seconds += (end_time - start_time)
+        # Only count completed runs and truly active running runs
+        if run['completed_at'] and status in ['completed', 'failed', 'stopped']:
+            # Use actual completion time for finished runs
+            end_time = datetime.fromisoformat(run['completed_at'].replace('Z', '+00:00')).timestamp()
+            duration = end_time - start_time
+            
+            # Sanity check: skip runs longer than 4 hours (clearly errors)
+            if duration > 14400:  # 4 hours
+                logger.warning(f"Skipping agent run {run_id} with suspicious duration: {duration/60:.1f} minutes")
+                continue
+                
+            total_seconds += duration
+            
+        elif status == 'running':
+            # For running jobs, check if they're stuck
+            time_since_start = now_ts - start_time
+            
+            if time_since_start > 3600:  # 1 hour limit for "running" jobs
+                # This is a stuck run - mark it as failed and don't count usage
+                stuck_runs_found.append(run_id)
+                logger.warning(f"Found stuck agent run {run_id} that started {time_since_start/60:.1f} minutes ago")
+                continue
+            else:
+                # Truly active run - count current duration but cap at reasonable limit
+                duration = time_since_start
+                if duration > 1800:  # Cap active runs at 30 minutes for billing
+                    duration = 1800
+                total_seconds += duration
+        
+        # Skip other statuses (failed, stopped without completion time, etc.)
     
-    return total_seconds / 60  # Convert to minutes
+    # Clean up stuck runs asynchronously (don't wait for this)
+    if stuck_runs_found:
+        logger.info(f"Marking {len(stuck_runs_found)} stuck runs as failed")
+        try:
+            await client.table('agent_runs').update({
+                'status': 'failed',
+                'completed_at': now.isoformat(),
+                'error': 'Agent run exceeded time limit and was marked as stuck'
+            }).in_('id', stuck_runs_found).execute()
+        except Exception as e:
+            logger.error(f"Failed to update stuck agent runs: {e}")
+    
+    total_minutes = total_seconds / 60
+    logger.info(f"Calculated {total_minutes:.2f} minutes of usage for user {user_id} this month")
+    return total_minutes
 
 async def get_allowed_models_for_user(client, user_id: str):
     """
