@@ -1,3 +1,4 @@
+// Force clean deploy - favicon cache fix 2025-06-24
 import { ThemeProvider } from '@/components/home/theme-provider';
 import { siteConfig } from '@/lib/site';
 import type { Metadata, Viewport } from 'next';
