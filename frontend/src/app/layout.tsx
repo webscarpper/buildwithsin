@@ -1,4 +1,4 @@
-// Force clean deploy - favicon cache fix 2025-06-24
+// Force clean deploy - favicon cache fix updated 2025-06-24 8:07 PM
 import { ThemeProvider } from '@/components/home/theme-provider';
 import { siteConfig } from '@/lib/site';
 import type { Metadata, Viewport } from 'next';
@@ -103,12 +103,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/goata-symbol-favicon.ico', sizes: 'any' },
-      { url: '/goata-symbol-favicon.ico', sizes: '32x32' },
-      { url: '/goata-symbol-favicon.ico', sizes: '16x16' }
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.ico', sizes: '32x32' },
+      { url: '/favicon.ico', sizes: '16x16' }
     ],
-    shortcut: '/goata-symbol-favicon.ico',
-    apple: '/goata-symbol-favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
   },
   // manifest: "/manifest.json",
   alternates: {
@@ -189,8 +189,8 @@ export default function RootLayout({
 
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
           <Providers>
