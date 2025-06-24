@@ -82,7 +82,7 @@ export function UseCasesSection() {
       <div className="relative w-full h-full">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 w-full max-w-6xl mx-auto">
           {useCases.map((useCase, index) => (
-            <button key={index} className="usecase-card has-tilt text-left" onClick={() => handleCardClick(useCase.description)}>
+            <button key={index} className="usecase-card text-left" onClick={() => handleCardClick(useCase.description)}>
               <div className="w-6 h-6 mb-2 text-cyan-400">
                 {index === 0 && <ArrowRight />}
                 {index === 1 && <ArrowRight />}

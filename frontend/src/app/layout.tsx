@@ -102,15 +102,9 @@ export const metadata: Metadata = {
     ],
   },
   icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/favicon.ico', sizes: '32x32' },
-      { url: '/favicon.ico', sizes: '16x16' }
-    ],
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
+    icon: { url: '/goata-symbol-favicon.ico?v=2', sizes: 'any' },
   },
-  // manifest: "/manifest.json",
+  manifest: "/manifest.json",
   alternates: {
     canonical: siteConfig.url,
   },
