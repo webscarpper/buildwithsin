@@ -111,21 +111,13 @@ async def log_requests_middleware(request: Request, call_next):
 
 # Define allowed origins based on environment
 allowed_origins = [
-    "https://www.suna.so",
-    "https://suna.so",
     "https://www.goata.app",
     "https://goata.app",
     "http://localhost:3000"
 ]
-allow_origin_regex = None
 
-# Add staging-specific origins and Vercel preview URLs
-if config.ENV_MODE == EnvMode.STAGING:
-    allowed_origins.append("https://staging.suna.so")
-    allow_origin_regex = r"https://suna-.*-prjcts\.vercel\.app"
-else:
-    # Allow Vercel preview URLs for production
-    allow_origin_regex = r"https://goata-.*\.vercel\.app"
+# Allow Vercel preview URLs for all environments
+allow_origin_regex = r"https://goata-.*\.vercel\.app"
 
 app.add_middleware(
     CORSMiddleware,
