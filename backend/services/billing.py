@@ -289,7 +289,7 @@ async def check_billing_status(client, user_id: str) -> Tuple[bool, str, Optiona
     subscription = await get_user_subscription(user_id)
     # print("Current subscription:", subscription)
     
-    # If no Stripe subscription, check Supabase for manual subscriptions
+    # If no Stripe subscription, check Supabase for manual subscriptions first
     if not subscription:
         # Check the subscriptions table for this user
         supabase_subscription_result = await client.schema('basejump').from_('billing_subscriptions') \
@@ -308,8 +308,9 @@ async def check_billing_status(client, user_id: str) -> Tuple[bool, str, Optiona
                 'plan_name': plan_name,
                 'minutes_limit': 'unlimited'
             }
-        
-        # If no subscription found anywhere, default to free tier
+    
+    # If no subscription, they can use free tier
+    if not subscription:
         subscription = {
             'price_id': config.STRIPE_FREE_TIER_ID,  # Free tier
             'plan_name': 'free'
