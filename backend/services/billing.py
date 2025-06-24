@@ -224,6 +224,31 @@ async def get_allowed_models_for_user(client, user_id: str):
         tier_info = SUBSCRIPTION_TIERS.get(price_id)
         if tier_info:
             tier_name = tier_info['name']
+    else:
+        # No Stripe subscription found, check Supabase for manual subscriptions
+        supabase_subscription_result = await client.schema('basejump').from_('billing_subscriptions') \
+            .select('*') \
+            .eq('account_id', user_id) \
+            .eq('status', 'active') \
+            .execute()
+        
+        if supabase_subscription_result.data and len(supabase_subscription_result.data) > 0:
+            # Found an active custom subscription - give access to all premium models
+            # Find the highest tier available (usually the last one in SUBSCRIPTION_TIERS)
+            highest_tier = None
+            for tier_id, tier_info in SUBSCRIPTION_TIERS.items():
+                if tier_info['name'] != 'free':
+                    highest_tier = tier_info['name']
+            
+            # If we found a premium tier, use it; otherwise allow all models
+            if highest_tier and highest_tier in MODEL_ACCESS_TIERS:
+                return MODEL_ACCESS_TIERS[highest_tier]
+            else:
+                # Fallback: return all available models
+                all_models = set()
+                for models_list in MODEL_ACCESS_TIERS.values():
+                    all_models.update(models_list)
+                return list(all_models)
     
     # Return allowed models for this tier
     return MODEL_ACCESS_TIERS.get(tier_name, MODEL_ACCESS_TIERS['free'])  # Default to free tier if unknown
@@ -264,8 +289,27 @@ async def check_billing_status(client, user_id: str) -> Tuple[bool, str, Optiona
     subscription = await get_user_subscription(user_id)
     # print("Current subscription:", subscription)
     
-    # If no subscription, they can use free tier
+    # If no Stripe subscription, check Supabase for manual subscriptions
     if not subscription:
+        # Check the subscriptions table for this user
+        supabase_subscription_result = await client.schema('basejump').from_('billing_subscriptions') \
+            .select('*') \
+            .eq('account_id', user_id) \
+            .eq('status', 'active') \
+            .execute()
+        
+        if supabase_subscription_result.data and len(supabase_subscription_result.data) > 0:
+            # Found an active subscription in Supabase - allow unlimited usage for custom plans
+            supabase_sub = supabase_subscription_result.data[0]
+            plan_name = supabase_sub.get('plan_name', 'custom')
+            
+            return True, "Custom subscription active", {
+                'price_id': plan_name,
+                'plan_name': plan_name,
+                'minutes_limit': 'unlimited'
+            }
+        
+        # If no subscription found anywhere, default to free tier
         subscription = {
             'price_id': config.STRIPE_FREE_TIER_ID,  # Free tier
             'plan_name': 'free'
@@ -691,7 +735,36 @@ async def get_subscription(
         # print("Subscription data for status:", subscription)
         
         if not subscription:
-            # Default to free tier status if no active subscription for our product
+            # Check for manual subscription in Supabase database (for cases where Stripe isn't configured)
+            db = DBConnection()
+            client = await db.client
+            
+            # Check the subscriptions table for this user
+            supabase_subscription_result = await client.schema('basejump').from_('billing_subscriptions') \
+                .select('*') \
+                .eq('account_id', current_user_id) \
+                .eq('status', 'active') \
+                .execute()
+            
+            if supabase_subscription_result.data and len(supabase_subscription_result.data) > 0:
+                # Found an active subscription in Supabase
+                supabase_sub = supabase_subscription_result.data[0]
+                plan_name = supabase_sub.get('plan_name', 'custom')
+                
+                # Return active status for custom subscriptions
+                return SubscriptionStatus(
+                    status="active",
+                    plan_name=plan_name,
+                    price_id=plan_name,  # Use plan_name as price_id for custom plans
+                    current_period_end=None,  # No period end for manual subscriptions
+                    cancel_at_period_end=False,
+                    trial_end=None,
+                    minutes_limit=None,  # No limit for custom plans
+                    current_usage=0.0,
+                    has_schedule=False
+                )
+            
+            # Default to free tier status if no active subscription found anywhere
             free_tier_id = config.STRIPE_FREE_TIER_ID
             free_tier_info = SUBSCRIPTION_TIERS.get(free_tier_id)
             return SubscriptionStatus(
