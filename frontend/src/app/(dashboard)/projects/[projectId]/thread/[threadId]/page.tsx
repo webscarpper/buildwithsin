@@ -498,7 +498,7 @@ export default function ThreadPage({
 
   useEffect(() => {
     if (initialLoadCompleted && subscriptionData) {
-      const hasSeenUpgradeDialog = localStorage.getItem('suna_upgrade_dialog_displayed');
+      const hasSeenUpgradeDialog = localStorage.getItem('goata_upgrade_dialog_displayed');
       const isFreeTier = subscriptionStatus === 'no_subscription';
       if (!hasSeenUpgradeDialog && isFreeTier && !isLocalMode()) {
         setShowUpgradeDialog(true);
@@ -508,7 +508,7 @@ export default function ThreadPage({
 
   const handleDismissUpgradeDialog = () => {
     setShowUpgradeDialog(false);
-    localStorage.setItem('suna_upgrade_dialog_displayed', 'true');
+    localStorage.setItem('goata_upgrade_dialog_displayed', 'true');
   };
 
   useEffect(() => {

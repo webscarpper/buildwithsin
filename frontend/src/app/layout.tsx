@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     'research',
     'data analysis',
   ],
-  authors: [{ name: 'GOATA Team', url: 'https://suna.so' }],
+  authors: [{ name: 'GOATA Team', url: 'https://goata.app' }],
   creator:
     'GOATA Team',
   publisher:
@@ -102,12 +102,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
-      { url: '/goata-symbol.png', sizes: '32x32', type: 'image/png' },
-      { url: '/goata-symbol.png', sizes: '16x16', type: 'image/png' }
+      { url: '/goata-symbol-favicon.ico', sizes: 'any' },
+      { url: '/goata-symbol-favicon.ico', sizes: '32x32' },
+      { url: '/goata-symbol-favicon.ico', sizes: '16x16' }
     ],
-    shortcut: '/favicon.ico',
-    apple: '/goata-symbol.png',
+    shortcut: '/goata-symbol-favicon.ico',
+    apple: '/goata-symbol-favicon.ico',
   },
   // manifest: "/manifest.json",
   alternates: {

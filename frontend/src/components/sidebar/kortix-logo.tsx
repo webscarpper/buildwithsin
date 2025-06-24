@@ -4,10 +4,10 @@ import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
-interface KortixLogoProps {
+interface GoataLogoProps {
   size?: number;
 }
-export function KortixLogo({ size = 32 }: KortixLogoProps) {
+export function GoataLogo({ size = 32 }: GoataLogoProps) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -26,3 +26,6 @@ export function KortixLogo({ size = 32 }: KortixLogoProps) {
       />
   );
 }
+
+// Legacy export for backward compatibility
+export const KortixLogo = GoataLogo;
