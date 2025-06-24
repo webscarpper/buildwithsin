@@ -154,9 +154,22 @@ class Configuration:
     STRIPE_DEFAULT_PLAN_ID: Optional[str] = None
     STRIPE_DEFAULT_TRIAL_DAYS: int = 14
     
-    # Stripe Product IDs
-    STRIPE_PRODUCT_ID_PROD: str = 'prod_SCl7AQ2C8kK1CD'
-    STRIPE_PRODUCT_ID_STAGING: str = 'prod_SCgIj3G7yPOAWY'
+    # Stripe Product IDs - All valid GOATA product IDs
+    # Since you only have production environment, using same IDs for both staging and production
+    STRIPE_VALID_PRODUCT_IDS: list = [
+        'prod_SYgMtJGKrCAjMT',  # GOATA Free Plan
+        'prod_SYgUKwz8jEm4xs',  # GOATA Starter Plan - 2 Hours
+        'prod_SYgnq3dsHCQxzN',  # GOATA Basic Plan - 6 Hours
+        'prod_SYgqcyrhqkf8Lt',  # GOATA Professional Plan - 12 Hours
+        'prod_SYgseF8WtBGn5O',  # GOATA Advanced Plan - 25 Hours
+        'prod_SYgvQR4wRaJmHh',  # GOATA Premium Plan - 50 Hours
+        'prod_SYgyoPbiRcbLE7',  # GOATA Enterprise Plan - 125 Hours
+        'prod_SYh0mSQnprPAbJ',  # GOATA Enterprise+ Plan - 200 Hours
+    ]
+    
+    # Legacy fields (kept for backward compatibility)
+    STRIPE_PRODUCT_ID_PROD: str = 'prod_SYgMtJGKrCAjMT'  # Free Plan as default
+    STRIPE_PRODUCT_ID_STAGING: str = 'prod_SYgMtJGKrCAjMT'
     
     # Sandbox configuration
     SANDBOX_IMAGE_NAME = "kortix/suna:0.1.3"

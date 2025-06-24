@@ -366,9 +366,11 @@ async def create_checkout_session(
         except stripe.error.InvalidRequestError:
             raise HTTPException(status_code=400, detail=f"Invalid price ID: {request.price_id}")
             
-        # Verify the price belongs to our product
-        if product_id != config.STRIPE_PRODUCT_ID:
-            raise HTTPException(status_code=400, detail="Price ID does not belong to the correct product.")
+        # Verify the price belongs to one of our valid GOATA products
+        valid_product_ids = getattr(config, 'STRIPE_VALID_PRODUCT_IDS', [config.STRIPE_PRODUCT_ID_PROD])
+        
+        if product_id not in valid_product_ids:
+            raise HTTPException(status_code=400, detail=f"Price ID does not belong to any valid GOATA product. Product ID: {product_id}")
             
         # Check for existing subscription for our product
         existing_subscription = await get_user_subscription(current_user_id)
