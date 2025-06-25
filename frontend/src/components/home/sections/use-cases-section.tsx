@@ -15,54 +15,29 @@ const PENDING_PROMPT_KEY = 'pendingAgentPrompt';
 
 export function UseCasesSection() {
   const { useCases } = siteConfig;
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const { user, isLoading } = useAuth();
-  const initiateAgentMutation = useInitiateAgentMutation();
 
-  const createAgentWithPrompt = async (prompt: string) => {
-    if (!prompt.trim() || isSubmitting) return;
-    setIsSubmitting(true);
-    try {
-      const formData = new FormData();
-      formData.append('prompt', prompt.trim());
-      formData.append('model_name', 'openrouter/deepseek/deepseek-chat');
-      formData.append('enable_thinking', 'false');
-      formData.append('reasoning_effort', 'low');
-      formData.append('stream', 'true');
-      formData.append('enable_context_manager', 'false');
-
-      const result = await initiateAgentMutation.mutateAsync(formData);
-
-      window.location.href = `/thread/${result.thread_id}`;
-    } catch (error: any) {
-      if (error instanceof BillingError) {
-        console.log('Billing error:');
-      } else {
-        const isConnectionError =
-          error instanceof TypeError &&
-          error.message.includes('Failed to fetch');
-        if (!isLocalMode() || isConnectionError) {
-          console.error(
-            error.message || 'Failed to create agent. Please try again.',
-          );
-        }
-      }
-    } finally {
-      setIsSubmitting(false);
+  const useCasesWithLinks = useCases.map((useCase) => {
+    switch (useCase.title) {
+      case 'DeFi Yield Farming':
+        return { ...useCase, href: 'https://goata.app/share/f6006983-8b05-42d1-8b5b-e1cdfa71faae' };
+      case 'RWA Tokenization...':
+        return { ...useCase, href: 'https://goata.app/share/7ba9d31b-7862-42a4-ace1-7f0c2adcdc56' };
+      case 'GameFi & Metaverse...':
+        return { ...useCase, href: 'https://goata.app/share/f82a7ce4-f8df-45be-8397-04cd155f8b83' };
+      case 'DAO Governance...':
+        return { ...useCase, href: 'https://goata.app/share/e1dcc901-24cd-4511-91b6-b77922e7049b' };
+      case 'Automated Smart...':
+        return { ...useCase, href: 'https://goata.app/share/5ae43af3-4c08-4d27-94ed-73e3bbe266d9' };
+      case 'Web3 Market Intel':
+        return { ...useCase, href: 'https://goata.app/share/f49fc3a2-8e32-45ed-8599-03122bea2f6a' };
+      case 'Cross-Chain Arbitrage':
+        return { ...useCase, href: 'https://goata.app/share/0e5b4e7b-fea5-4797-8a89-b832b4752a54' };
+      case 'DeFi Portfolio...':
+        return { ...useCase, href: 'https://goata.app/share/b892fcb2-dc77-43df-8566-41492dc9aa53' };
+      default:
+        return { ...useCase, href: '#' };
     }
-  };
-
-  const handleCardClick = (prompt: string) => {
-    if (!prompt.trim() || isSubmitting) return;
-
-    if (!user && !isLoading) {
-      localStorage.setItem(PENDING_PROMPT_KEY, prompt.trim());
-      window.location.href = '/auth';
-      return;
-    }
-
-    createAgentWithPrompt(prompt);
-  };
+  });
 
   return (
     <section
@@ -81,17 +56,10 @@ export function UseCasesSection() {
 
       <div className="relative w-full h-full">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 w-full max-w-6xl mx-auto">
-          {useCases.map((useCase, index) => (
-            <button key={index} className="usecase-card text-left" onClick={() => handleCardClick(useCase.description)}>
+          {useCasesWithLinks.map((useCase, index) => (
+            <a key={index} href={useCase.href} target="_blank" rel="noopener noreferrer" className="usecase-card text-left">
               <div className="w-6 h-6 mb-2 text-cyan-400">
-                {index === 0 && <ArrowRight />}
-                {index === 1 && <ArrowRight />}
-                {index === 2 && <ArrowRight />}
-                {index === 3 && <ArrowRight />}
-                {index === 4 && <ArrowRight />}
-                {index === 5 && <ArrowRight />}
-                {index === 6 && <ArrowRight />}
-                {index === 7 && <ArrowRight />}
+                <ArrowRight />
               </div>
               <h3 className="text-lg font-medium line-clamp-1">
                 {useCase.title}
@@ -99,7 +67,7 @@ export function UseCasesSection() {
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {useCase.description}
               </p>
-            </button>
+            </a>
           ))}
         </div>
 
