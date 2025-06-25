@@ -24,7 +24,7 @@ class Colors:
     UNDERLINE = '\033[4m'
 
 def print_banner():
-    """Print Suna setup banner"""
+    """Print GOATA setup banner"""
     print(f"""
 {Colors.BLUE}{Colors.BOLD}
    ███████╗██╗   ██╗███╗   ██╗ █████╗ 
