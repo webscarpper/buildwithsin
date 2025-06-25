@@ -24,6 +24,7 @@ from services import transcription as transcription_api
 from services.mcp_custom import discover_custom_tools
 import sys
 from services import email_api
+from services import hooks as hooks_api
 
 
 load_dotenv()
@@ -143,6 +144,8 @@ app.include_router(mcp_api.router, prefix="/api")
 app.include_router(transcription_api.router, prefix="/api")
 
 app.include_router(email_api.router, prefix="/api")
+
+app.include_router(hooks_api.router, prefix="/api/hooks")
 
 @app.get("/api/health")
 async def health_check():
