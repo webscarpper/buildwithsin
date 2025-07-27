@@ -774,6 +774,17 @@ async def get_subscription(
 ):
     """Get the current subscription status for the current user, including scheduled changes."""
     try:
+        # If in local development mode, return a mock subscription
+        if config.ENV_MODE == EnvMode.LOCAL:
+            return SubscriptionStatus(
+                status="active",
+                plan_name="Local Development",
+                price_id="local_dev",
+                minutes_limit=9999,
+                current_usage=0,
+                has_schedule=False,
+            )
+
         # Get subscription from Stripe (this helper already handles filtering/cleanup)
         subscription = await get_user_subscription(current_user_id)
         # print("Subscription data for status:", subscription)
