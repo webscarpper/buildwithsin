@@ -19,21 +19,21 @@ export function UseCasesSection() {
   const useCasesWithLinks = useCases.map((useCase) => {
     switch (useCase.title) {
       case 'DeFi Yield Farming':
-        return { ...useCase, href: 'https://goata.app/share/f6006983-8b05-42d1-8b5b-e1cdfa71faae' };
+        return { ...useCase, href: 'https://buildwithsin.com/share/f6006983-8b05-42d1-8b5b-e1cdfa71faae' };
       case 'RWA Tokenization...':
-        return { ...useCase, href: 'https://goata.app/share/7ba9d31b-7862-42a4-ace1-7f0c2adcdc56' };
+        return { ...useCase, href: 'https://buildwithsin.com/share/7ba9d31b-7862-42a4-ace1-7f0c2adcdc56' };
       case 'GameFi & Metaverse...':
-        return { ...useCase, href: 'https://goata.app/share/f82a7ce4-f8df-45be-8397-04cd155f8b83' };
+        return { ...useCase, href: 'https://buildwithsin.com/share/f82a7ce4-f8df-45be-8397-04cd155f8b83' };
       case 'DAO Governance...':
-        return { ...useCase, href: 'https://goata.app/share/e1dcc901-24cd-4511-91b6-b77922e7049b' };
+        return { ...useCase, href: 'https://buildwithsin.com/share/e1dcc901-24cd-4511-91b6-b77922e7049b' };
       case 'Automated Smart...':
-        return { ...useCase, href: 'https://goata.app/share/5ae43af3-4c08-4d27-94ed-73e3bbe266d9' };
+        return { ...useCase, href: 'https://buildwithsin.com/share/5ae43af3-4c08-4d27-94ed-73e3bbe266d9' };
       case 'Web3 Market Intel':
-        return { ...useCase, href: 'https://goata.app/share/f49fc3a2-8e32-45ed-8599-03122bea2f6a' };
+        return { ...useCase, href: 'https://buildwithsin.com/share/f49fc3a2-8e32-45ed-8599-03122bea2f6a' };
       case 'Cross-Chain Arbitrage':
-        return { ...useCase, href: 'https://goata.app/share/0e5b4e7b-fea5-4797-8a89-b832b4752a54' };
+        return { ...useCase, href: 'https://buildwithsin.com/share/0e5b4e7b-fea5-4797-8a89-b832b4752a54' };
       case 'DeFi Portfolio...':
-        return { ...useCase, href: 'https://goata.app/share/b892fcb2-dc77-43df-8566-41492dc9aa53' };
+        return { ...useCase, href: 'https://buildwithsin.com/share/b892fcb2-dc77-43df-8566-41492dc9aa53' };
       default:
         return { ...useCase, href: '#' };
     }
@@ -46,10 +46,10 @@ export function UseCasesSection() {
     >
       <SectionHeader>
         <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-center text-balance" style={{ display: 'inline-block', verticalAlign: 'middle' }}>
-          See <span className="goata-logo-text" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '0.8em', verticalAlign: 'middle' }}>GOATA</span> in action
+          See <span className="buildwithsin-logo-text" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '0.8em', verticalAlign: 'middle' }}>BuildWithSin</span> in action
         </h2>
         <p className="text-muted-foreground text-center text-balance font-medium">
-          Explore real-world examples of how GOATA completes complex tasks
+          Explore real-world examples of how BuildWithSin completes complex tasks
           autonomously
         </p>
       </SectionHeader>

@@ -1,10 +1,10 @@
 {
-  "name": "GOATA",
-  "short_name": "GOATA",
-  "description": "GOATA is a DeFAI Agent that navigates the future of Web3, finding you alpha before the FOMO sets in.",
+  "name": "BuildWithSin",
+  "short_name": "BuildWithSin",
+  "description": "The AI that understands what you're building",
   "icons": [
     {
-      "src": "/goata-symbol-favicon.ico",
+      "src": "/buildwithsin-symbol-favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }

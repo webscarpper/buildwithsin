@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     template: `%s - ${siteConfig.name}`,
   },
   description:
-    'GOATA is a DeFAI Agent that navigates the future of Web3, finding you alpha before the FOMO sets in.',
+    'The AI that understands what you\'re building',
   keywords: [
     'AI',
     'artificial intelligence',
@@ -47,13 +47,13 @@ export const metadata: Metadata = {
     'research',
     'data analysis',
   ],
-  authors: [{ name: 'GOATA Team', url: 'https://goata.app' }],
+  authors: [{ name: 'BuildWithSin Team', url: 'https://buildwithsin.com' }],
   creator:
-    'GOATA Team',
+    'BuildWithSin Team',
   publisher:
-    'GOATA Team',
+    'BuildWithSin Team',
   category: 'Technology',
-  applicationName: 'GOATA',
+  applicationName: 'BuildWithSin',
   formatDetection: {
     telephone: false,
     email: false,
@@ -68,17 +68,17 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'GOATA - Your Alpha-finding Web3 Agent.',
+    title: 'BuildWithSin - The AI that understands what you\'re building',
     description:
-      'GOATA is a DeFAI Agent that navigates the future of Web3, finding you alpha before the FOMO sets in.',
+      'The AI that understands what you\'re building',
     url: siteConfig.url,
-    siteName: 'GOATA',
+    siteName: 'BuildWithSin',
     images: [
       {
         url: '/banner.png',
         width: 1200,
         height: 630,
-        alt: 'GOATA - Your Alpha-finding Web3 Agent.',
+        alt: 'BuildWithSin - The AI that understands what you\'re building',
         type: 'image/png',
       },
     ],
@@ -87,22 +87,22 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'GOATA - Your Alpha-finding Web3 Agent.',
+    title: 'BuildWithSin - The AI that understands what you\'re building',
     description:
-      'GOATA is a DeFAI Agent that navigates the future of Web3, finding you alpha before the FOMO sets in.',
-    creator: '@goata_ai',
-    site: '@goata_ai',
+      'The AI that understands what you\'re building',
+    creator: '@BuildWithSin',
+    site: '@BuildWithSin',
     images: [
       {
         url: '/banner.png',
         width: 1200,
         height: 630,
-        alt: 'GOATA - Your Alpha-finding Web3 Agent.',
+        alt: 'BuildWithSin - The AI that understands what you\'re building',
       },
     ],
   },
   icons: {
-    icon: { url: '/goata-symbol-favicon.ico?v=2', sizes: 'any' },
+    icon: { url: '/buildwithsin-symbol-favicon.ico?v=2', sizes: 'any' },
   },
   manifest: "/manifest.json",
   alternates: {
@@ -131,46 +131,8 @@ export default function RootLayout({
       </head>
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans bg-background`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans bg-white bg-gradient-to-b from-white to-slate-50 min-h-screen`}
       >
-        <div className="goata-background">
-          <div className="grid-background"></div>
-          <div className="energy-waves"></div>
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={`p-${i}`}
-              className="particle"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                width: `${1 + Math.random() * 2}px`,
-                height: `${1 + Math.random() * 2}px`,
-                animationDelay: `${Math.random() * 5}s`,
-                animationDuration: `${3 + Math.random() * 4}s`,
-              }}
-            />
-          ))}
-          {[...Array(10)].map((_, i) => (
-            <div
-              key={`o-${i}`}
-              className="floating-orb"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 8}s`,
-                animationDuration: `${8 + Math.random() * 4}s`,
-              }}
-            >
-              <div
-                className="orb-core"
-                style={{
-                  width: `${6 + Math.random() * 12}px`,
-                  height: `${6 + Math.random() * 12}px`,
-                }}
-              />
-            </div>
-          ))}
-        </div>
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-PCHSN4M2"

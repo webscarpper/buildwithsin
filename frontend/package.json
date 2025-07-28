@@ -1,9 +1,19 @@
 {
-  "name": "suna",
+  "name": "buildwithsin",
   "version": "0.1.0",
+  "description": "The AI that understands what you're building",
+  "keywords": [
+    "ai",
+    "agent",
+    "buildwithsin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BuildWithSin/BuildWithSin.git"
+  },
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -H 0.0.0.0",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

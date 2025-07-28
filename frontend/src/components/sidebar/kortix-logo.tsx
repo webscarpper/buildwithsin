@@ -4,10 +4,10 @@ import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
-interface GoataLogoProps {
+interface BuildWithSinLogoProps {
   size?: number;
 }
-export function GoataLogo({ size = 32 }: GoataLogoProps) {
+export function BuildWithSinLogo({ size = 32 }: BuildWithSinLogoProps) {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -18,8 +18,8 @@ export function GoataLogo({ size = 32 }: GoataLogoProps) {
 
   return (
     <Image
-        src="/goata-symbol.png"
-        alt="GOATA"
+        src="/buildwithsin-symbol.png"
+        alt="BuildWithSin"
         width={size}
         height={size}
         className={`flex-shrink-0`}
@@ -28,4 +28,4 @@ export function GoataLogo({ size = 32 }: GoataLogoProps) {
 }
 
 // Legacy export for backward compatibility
-export const KortixLogo = GoataLogo;
+export const KortixLogo = BuildWithSinLogo;

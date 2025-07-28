@@ -32,10 +32,10 @@ export function UpgradeDialog({ open, onOpenChange, onDismiss }: UpgradeDialogPr
         <DialogHeader>
           <DialogTitle className="flex items-center">
             <Crown className="h-5 w-5 mr-2 text-primary" />
-            Unlock the Full GOATA Experience
+            Unlock the Full BuildWithSin Experience
           </DialogTitle>
           <DialogDescription>
-            You're currently using GOATA's free tier with limited capabilities.
+            You're currently using BuildWithSin's free tier with limited capabilities.
             Upgrade now to access our most powerful AI model.
           </DialogDescription>
         </DialogHeader>

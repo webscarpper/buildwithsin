@@ -1,11 +1,11 @@
 export const siteConfig = {
-  name: 'GOATA',
-  url: 'https://goata.app/',
-  description: 'Greatest of All Time Assistant',
+  name: 'BuildWithSin',
+  url: 'https://buildwithsin.com/',
+  description: 'The AI that understands what you\'re building',
   links: {
-    twitter: 'https://x.com/GoataAI',
-    telegram: 'https://t.me/GoataAI',
-    github: 'https://github.com/goata-ai/goata',
+    twitter: 'https://x.com/BuildWithSin',
+    telegram: 'https://t.me/BuildWithSin',
+    github: 'https://github.com/buildwithsin/buildwithsin',
   },
 };
 

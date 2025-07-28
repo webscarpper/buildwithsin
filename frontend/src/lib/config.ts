@@ -66,7 +66,7 @@ const PROD_TIERS: SubscriptionTiers = {
   },
 } as const;
 
-// Staging tier IDs - Updated to use your GOATA Stripe Price IDs (same as production)
+// Staging tier IDs - Updated to use your BuildWithSin Stripe Price IDs (same as production)
 const STAGING_TIERS: SubscriptionTiers = {
   FREE: {
     priceId: 'price_1RdYzWFGcO2Bsf6G6DtXgpfH',

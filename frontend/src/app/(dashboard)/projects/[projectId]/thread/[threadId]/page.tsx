@@ -462,7 +462,7 @@ export default function ThreadPage({
   // SEO title update
   useEffect(() => {
     if (projectName) {
-      document.title = `${projectName} | GOATA`;
+      document.title = `${projectName} | BuildWithSin`;
 
       const metaDescription = document.querySelector(
         'meta[name="description"]',
@@ -470,13 +470,13 @@ export default function ThreadPage({
       if (metaDescription) {
         metaDescription.setAttribute(
           'content',
-          `${projectName} - Interactive agent conversation powered by GOATA`,
+          `${projectName} - Interactive agent conversation powered by BuildWithSin`,
         );
       }
 
       const ogTitle = document.querySelector('meta[property="og:title"]');
       if (ogTitle) {
-        ogTitle.setAttribute('content', `${projectName} | GOATA`);
+        ogTitle.setAttribute('content', `${projectName} | BuildWithSin`);
       }
 
       const ogDescription = document.querySelector(
@@ -632,7 +632,7 @@ export default function ThreadPage({
               value={newMessage}
               onChange={setNewMessage}
               onSubmit={handleSubmitMessage}
-              placeholder={`Ask ${agent ? agent.name : 'GOATA'} anything...`}
+              placeholder={`Ask ${agent ? agent.name : 'BuildWithSin'} anything...`}
               loading={isSending}
               disabled={isSending || agentStatus === 'running' || agentStatus === 'connecting'}
               isAgentRunning={agentStatus === 'running' || agentStatus === 'connecting'}

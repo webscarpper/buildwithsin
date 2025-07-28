@@ -26,7 +26,6 @@ COPY . .
 
 ENV NEXT_PUBLIC_VERCEL_ENV production
 
-RUN npm run build
 
 EXPOSE 3000
 

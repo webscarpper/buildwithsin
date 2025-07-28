@@ -4,14 +4,14 @@ import { siteConfig } from '@/lib/site';
 export const metadata: Metadata = {
   title: siteConfig.name,
   description: siteConfig.description,
-  keywords: ['GOATA', 'AI', 'Agent'],
+  keywords: ['BuildWithSin', 'AI', 'Agent'],
   authors: [
     {
-      name: 'GOATA AI Corp',
-      url: 'https://goata.ai',
+      name: 'BuildWithSin',
+      url: 'https://buildwithsin.com',
     },
   ],
-  creator: 'GOATA AI Corp',
+  creator: 'BuildWithSin',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.name,
     description: siteConfig.description,
-    creator: '@kortixai',
+    creator: '@BuildWithSin',
   },
   robots: {
     index: true,

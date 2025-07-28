@@ -432,8 +432,8 @@ export const PlaybackControls = ({
               >
                 <Link href="/">
                   <img
-                    src="/goata-symbol.png"
-                    alt="GOATA"
+                    src="/buildwithsin-symbol.png"
+                    alt="BuildWithSin"
                     width={32}
                     height={32}
                     className="object-contain"

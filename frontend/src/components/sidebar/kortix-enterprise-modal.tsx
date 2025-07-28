@@ -41,8 +41,8 @@ export function KortixProcessModal() {
             <div className="relative z-10 flex flex-col h-full">
               <div className="mb-8 mt-0 flex-shrink-0">
                 <Image
-                  src="/goata-symbol.png"
-                  alt="GOATA Logo"
+                  src="/buildwithsin-symbol.png"
+                  alt="BuildWithSin Logo"
                   width={60}
                   height={60}
                   className="h-6 w-auto"

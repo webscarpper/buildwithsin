@@ -28,7 +28,7 @@ const PhantomSignIn: FC = () => {
       // Use the official Supabase Web3 authentication method (casting to any due to TypeScript definitions)
       const { data, error } = await (supabase.auth as any).signInWithWeb3({
         chain: 'solana',
-        statement: 'Welcome to GOATA. Please sign this message to log in.',
+        statement: 'Welcome to BuildWithSin. Please sign this message to log in.',
         wallet: wallet.adapter,
       });
 

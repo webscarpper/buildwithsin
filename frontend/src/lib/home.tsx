@@ -49,17 +49,17 @@ export interface PricingTier {
 }
 
 export const siteConfig = {
-  name: 'GOATA',
-  description: 'The DeFAI Agent that puts you ahead of the curve.',
+  name: 'BuildWithSin',
+  description: "The AI that understands what you're building",
   cta: 'Start Free',
   url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
   keywords: ['AI Agent', 'Web3', 'Crypto', 'DeFi', 'NFT', 'Autonomous Agent'],
   links: {
-    email: 'support@goata.ai',
-    twitter: 'https://x.com/goata_ai',
-    discord: 'https://discord.gg/goata',
-    github: 'https://github.com/your-repo/goata',
-    instagram: 'https://instagram.com/goata_ai',
+    email: 'support@buildwithsin.com',
+    twitter: 'https://x.com/BuildWithSin',
+    discord: 'https://discord.gg/buildwithsin',
+    github: 'https://github.com/buildwithsin/buildwithsin',
+    instagram: 'https://instagram.com/BuildWithSin',
   },
   nav: {
     links: [
@@ -69,18 +69,18 @@ export const siteConfig = {
     ],
   },
   hero: {
-    title: 'Deploy GOATA. Go Touch Grass.',
+    title: 'Deploy BuildWithSin. Go Touch Grass.',
     description:
       'A full-stack, autonomous degen agent that ships code, finds alpha, and grinds for you 24/7. No FUD, just WAGMI.',
-    inputPlaceholder: 'Unleash GOATA to find the next 100x gem...',
+    inputPlaceholder: 'Unleash BuildWithSin to find the next 100x gem...',
     featureColumns: [
       {
         title: 'FIND THE ALPHA',
-        description: 'Uncover hidden gems before the FOMO hits. GOATA scans on-chain data, tracks whale wallets, and analyzes DeFi protocols to find your next 100x.'
+        description: 'Uncover hidden gems before the FOMO hits. BuildWithSin scans on-chain data, tracks whale wallets, and analyzes DeFi protocols to find your next 100x.'
       },
       {
         title: 'SHIP ON-CHAIN',
-        description: 'Go from prompt to product, faster. GOATA writes, tests, and audits smart contracts, builds full-stack dApps, and automates your entire deployment pipeline.'
+        description: 'Go from prompt to product, faster. BuildWithSin writes, tests, and audits smart contracts, builds full-stack dApps, and automates your entire deployment pipeline.'
       },
       {
         title: 'OPERATE AUTONOMOUSLY',
@@ -112,7 +112,7 @@ export const siteConfig = {
       features: [
         '2 hours',
         'Private projects',
-        'Access to intelligent Model (Full GOATA)',
+        'Access to intelligent Model (Full BuildWithSin)',
       ],
       stripePriceId: config.SUBSCRIPTION_TIERS.TIER_2_20.priceId,
       upgradePlans: [],
@@ -363,15 +363,15 @@ export const siteConfig = {
     ],
   },
   featureSection: {
-    title: 'How GOATA Works',
+    title: 'How BuildWithSin Works',
     description:
-      'Discover how GOATA transforms your commands into action in four easy steps',
+      'Discover how BuildWithSin transforms your commands into action in four easy steps',
     items: [
       {
         id: 1,
         title: 'Request an Action',
         content:
-          'Speak or type your command—let GOATA capture your intent. Your request instantly sets the process in motion.',
+          'Speak or type your command—let BuildWithSin capture your intent. Your request instantly sets the process in motion.',
         image:
           'https://images.unsplash.com/photo-1720371300677-ba4838fa0678?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       },
@@ -379,7 +379,7 @@ export const siteConfig = {
         id: 2,
         title: 'AI Understanding & Planning',
         content:
-          'GOATA analyzes your request, understands the context, and develops a structured plan to complete the task efficiently.',
+          'BuildWithSin analyzes your request, understands the context, and develops a structured plan to complete the task efficiently.',
         image:
           'https://images.unsplash.com/photo-1686170287433-c95faf6d3608?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwzfHx8ZW58MHx8fHx8fA%3D%3D',
       },
@@ -387,7 +387,7 @@ export const siteConfig = {
         id: 3,
         title: 'Autonomous Execution',
         content:
-          'Using its capabilities and integrations, GOATA executes the task independently, handling any complexities along the way.',
+          'Using its capabilities and integrations, BuildWithSin executes the task independently, handling any complexities along the way.',
         image:
           'https://images.unsplash.com/photo-1720378042271-60aff1e1c538?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMHx8fGVufDB8fHx8fA%3D%3D',
       },
@@ -395,30 +395,30 @@ export const siteConfig = {
         id: 4,
         title: 'Results & Learning',
         content:
-          'GOATA delivers results and learns from each interaction, continuously improving its performance to better serve your needs.',
+          'BuildWithSin delivers results and learns from each interaction, continuously improving its performance to better serve your needs.',
         image:
           'https://images.unsplash.com/photo-1666882990322-e7f3b8df4f75?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fHw%3D',
       },
     ],
   },
   bentoSection: {
-    title: 'Empower Your Workflow with GOATA',
+    title: 'Empower Your Workflow with BuildWithSin',
     description:
-      'Let GOATA act on your behalf with advanced AI capabilities, seamless integrations, and autonomous task execution.',
+      'Let BuildWithSin act on your behalf with advanced AI capabilities, seamless integrations, and autonomous task execution.',
     items: [
       {
         id: 1,
         content: <FirstBentoAnimation />,
         title: 'Autonomous Task Execution',
         description:
-          'Experience true automation with GOATA. Ask your AI Agent to complete tasks, research information, and handle complex workflows with minimal supervision.',
+          'Experience true automation with BuildWithSin. Ask your AI Agent to complete tasks, research information, and handle complex workflows with minimal supervision.',
       },
       {
         id: 2,
         content: <SecondBentoAnimation />,
         title: 'Seamless Integrations',
         description:
-          'Connect GOATA to your existing tools for a unified workflow. Boost productivity through AI-powered interconnected systems.',
+          'Connect BuildWithSin to your existing tools for a unified workflow. Boost productivity through AI-powered interconnected systems.',
       },
       {
         id: 3,
@@ -432,21 +432,21 @@ export const siteConfig = {
         ),
         title: 'Intelligent Data Analysis',
         description:
-          "Transform raw data into actionable insights in seconds. Make better decisions with GOATA's real-time, adaptive intelligence.",
+          "Transform raw data into actionable insights in seconds. Make better decisions with BuildWithSin's real-time, adaptive intelligence.",
       },
       {
         id: 4,
         content: <FourthBentoAnimation once={false} />,
         title: 'Complete Customization',
         description:
-          'Tailor GOATA to your specific needs. As an open source solution, you have full control over its capabilities, integrations, and implementation.',
+          'Tailor BuildWithSin to your specific needs. As an open source solution, you have full control over its capabilities, integrations, and implementation.',
       },
     ],
   },
   benefits: [
     {
       id: 1,
-      text: "Automate everyday tasks with GOATA's powerful AI capabilities.",
+      text: "Automate everyday tasks with BuildWithSin's powerful AI capabilities.",
       image: '/Device-6.png',
     },
     {
@@ -456,7 +456,7 @@ export const siteConfig = {
     },
     {
       id: 3,
-      text: 'Improve focus on high-value work as GOATA handles the routine.',
+      text: 'Improve focus on high-value work as BuildWithSin handles the routine.',
       image: '/Device-8.png',
     },
     {
@@ -762,13 +762,13 @@ export const siteConfig = {
 
         title: 'Community Powered',
         description:
-          "Join a thriving community of developers and users continuously enhancing and expanding GOATA's capabilities.",
+          "Join a thriving community of developers and users continuously enhancing and expanding BuildWithSin's capabilities.",
       },
     ],
   },
   quoteSection: {
     quote:
-      'GOATA has transformed how we approach everyday tasks. The level of automation it provides, combined with its open source nature, makes it an invaluable tool for our entire organization.',
+      'BuildWithSin has transformed how we approach everyday tasks. The level of automation it provides, combined with its open source nature, makes it an invaluable tool for our entire organization.',
     author: {
       name: 'Alex Johnson',
       role: 'CTO, Innovatech',
@@ -778,7 +778,7 @@ export const siteConfig = {
   pricing: {
     title: 'Open Source & Free Forever',
     description:
-      'GOATA is 100% open source and free to use. No hidden fees, no premium features locked behind paywalls.',
+      'BuildWithSin is 100% open source and free to use. No hidden fees, no premium features locked behind paywalls.',
     pricingItems: [
       {
         name: 'Community',
@@ -793,7 +793,7 @@ export const siteConfig = {
           'Community support',
         ],
         description: 'Perfect for individual users and developers',
-        buttonText: 'Start with GOATA',
+        buttonText: 'Start with BuildWithSin',
         buttonColor: 'bg-accent text-primary',
         isPopular: false,
       },
@@ -1043,7 +1043,7 @@ export const siteConfig = {
   faqSection: {
     title: 'Frequently Asked Questions',
     description:
-      "Answers to common questions about GOATA and its capabilities. If you have any other questions, please don't hesitate to contact us.",
+      "Answers to common questions about BuildWithSin and its capabilities. If you have any other questions, please don't hesitate to contact us.",
     faQitems: [
       {
         id: 1,
@@ -1053,39 +1053,39 @@ export const siteConfig = {
       },
       {
         id: 2,
-        question: 'How does GOATA work?',
+        question: 'How does BuildWithSin work?',
         answer:
-          'GOATA works by analyzing your requirements, leveraging advanced AI algorithms to understand context, and executing tasks based on your instructions. It can integrate with your workflow, learn from feedback, and continuously improve its performance.',
+          'BuildWithSin works by analyzing your requirements, leveraging advanced AI algorithms to understand context, and executing tasks based on your instructions. It can integrate with your workflow, learn from feedback, and continuously improve its performance.',
       },
       {
         id: 3,
-        question: 'Is GOATA really free?',
+        question: 'Is BuildWithSin really free?',
         answer:
-          'Yes, GOATA is completely free and open source. We believe in democratizing AI technology and making it accessible to everyone. You can use it, modify it, and contribute to its development without any cost.',
+          'Yes, BuildWithSin is completely free and open source. We believe in democratizing AI technology and making it accessible to everyone. You can use it, modify it, and contribute to its development without any cost.',
       },
       {
         id: 4,
-        question: 'Can I integrate GOATA with my existing tools?',
+        question: 'Can I integrate BuildWithSin with my existing tools?',
         answer:
-          'Yes, GOATA is designed to be highly compatible with popular tools and platforms. We offer APIs and pre-built integrations for seamless connection with your existing workflow tools and systems.',
+          'Yes, BuildWithSin is designed to be highly compatible with popular tools and platforms. We offer APIs and pre-built integrations for seamless connection with your existing workflow tools and systems.',
       },
       {
         id: 5,
-        question: 'How can I contribute to GOATA?',
+        question: 'How can I contribute to BuildWithSin?',
         answer:
-          'You can contribute to GOATA by submitting pull requests on GitHub, reporting bugs, suggesting new features, or helping with documentation. Join our Discord community to connect with other contributors and start with GOATA.',
+          'You can contribute to BuildWithSin by submitting pull requests on GitHub, reporting bugs, suggesting new features, or helping with documentation. Join our Discord community to connect with other contributors and start with BuildWithSin.',
       },
       {
         id: 6,
-        question: 'How does GOATA save me time?',
+        question: 'How does BuildWithSin save me time?',
         answer:
-          'GOATA automates repetitive tasks, streamlines workflows, and provides quick solutions to common challenges. This automation and efficiency can save hours of manual work, allowing you to focus on more strategic activities.',
+          'BuildWithSin automates repetitive tasks, streamlines workflows, and provides quick solutions to common challenges. This automation and efficiency can save hours of manual work, allowing you to focus on more strategic activities.',
       },
     ],
   },
   ctaSection: {
     id: 'cta',
-    title: 'Get Your Web3 Alpha with GOATA Today',
+    title: 'Get Your Web3 Alpha with BuildWithSin Today',
     backgroundImage: '/holo.png',
     button: {
       text: 'Find Your Alpha',

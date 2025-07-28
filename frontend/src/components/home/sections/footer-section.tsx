@@ -18,7 +18,7 @@ export function FooterSection() {
     setMounted(true);
   }, []);
 
-  const logoSrc = '/goata-logo.png';
+  const logoSrc = '/buildwithsin-logo.png';
 
   return (
     <footer id="footer" className="w-full pb-0">
@@ -26,8 +26,8 @@ export function FooterSection() {
         <div className="flex flex-col items-start justify-start gap-y-5 max-w-xs mx-0">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/goata-logo.png"
-              alt="GOATA Logo"
+              src="/buildwithsin-logo.png"
+              alt="BuildWithSin Logo"
               width={140}
               height={60}
               priority

@@ -1,4 +1,4 @@
-# GOATA frontend
+# BuildWithSin frontend
 
 ## Getting Started
 

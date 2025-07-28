@@ -99,7 +99,7 @@ export function Navbar() {
   const toggleDrawer = () => setIsDrawerOpen((prev) => !prev);
   const handleOverlayClick = () => setIsDrawerOpen(false);
 
-  const logoSrc = '/goata-logo.png';
+  const logoSrc = '/buildwithsin-logo.png';
 
   return (
     <header
@@ -124,8 +124,8 @@ export function Navbar() {
           <div className="flex h-[56px] items-center justify-between p-4">
             <Link href="/" className="flex items-center gap-3">
               <Image
-                src="/goata-logo.png"
-                alt="GOATA Logo"
+                src="/buildwithsin-logo.png"
+                alt="BuildWithSin Logo"
                 width={140}
                 height={60}
                 priority
@@ -202,14 +202,14 @@ export function Navbar() {
                 <div className="flex items-center justify-between">
                   <Link href="/" className="flex items-center gap-3">
                     <Image
-                      src="/goata-logo.png"
-                      alt="GOATA Logo"
+                      src="/buildwithsin-logo.png"
+                      alt="BuildWithSin Logo"
                       width={140}
                       height={60}
                       priority
                     />
                     <span className="font-medium text-primary text-sm">
-                      / GOATA
+                      / BuildWithSin
                     </span>
                   </Link>
                   <button

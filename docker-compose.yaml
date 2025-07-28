@@ -82,11 +82,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
     env_file:
       - ./backend/.env
     environment:
-      - NODE_ENV=production
-    command: ["npm", "run", "start"]
+      - NODE_ENV=development
+    command: ["npm", "run", "dev"]
     depends_on:
       - backend
 

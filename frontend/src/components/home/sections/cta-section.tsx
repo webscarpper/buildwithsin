@@ -13,7 +13,7 @@ export function CTASection() {
       <div className="w-full max-w-6xl mx-auto px-6">
         <div className="cta-panel h-[400px] md:h-[400px] overflow-hidden w-full relative z-20 flex flex-col items-center justify-center">
           <h1 className="text-white text-4xl md:text-7xl font-medium tracking-tighter max-w-xs md:max-w-xl text-center">
-            Unlock <span className="goata-logo-text" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '0.8em' }}>Alpha</span>. Deploy Smarter.
+            Unlock <span className="buildwithsin-logo-text" style={{ fontFamily: '"Press Start 2P", cursive', fontSize: '0.8em' }}>Alpha</span>. Deploy Smarter.
           </h1>
           <div className="absolute bottom-10 flex flex-col items-center justify-center gap-2">
             <Link
